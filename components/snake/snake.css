@@ -1,0 +1,52 @@
+#snake-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.snake-board {
+  display: grid;
+  grid-template-columns: repeat(20, 20px);
+  gap: 1px;
+  margin-bottom: 10px;
+}
+
+.snake-cell {
+  width: 20px;
+  height: 20px;
+  background-color: #eee;
+  border: 1px solid #ccc;
+}
+
+.snake-body {
+  background-color: #28a745;
+}
+
+.snake-food {
+  background-color: #dc3545;
+}
+#snake-start-button {
+  box-shadow: inset 0px 1px 0px 0px #f9eca0;
+  background: linear-gradient(to bottom, #f0c911 5%, #f2ab1e 100%);
+  background-color: #f0c911;
+  border-radius: 6px;
+  border: 1px solid #e65f44;
+  display: inline-block;
+  cursor: pointer;
+  color: #c92200;
+  font-family: Arial;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 6px 24px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #ded17c;
+}
+
+#snake-start-button {
+  background: linear-gradient(to bottom, #f2ab1e 5%, #f0c911 100%);
+  background-color: #f2ab1e;
+}
+#snake-start-button {
+  position: relative;
+  top: 1px;
+}
