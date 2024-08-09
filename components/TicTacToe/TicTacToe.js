@@ -4,6 +4,7 @@ class TicTacToe {
     this.rootElement = rootElement
     this.board = Array(9).fill(null)
     this.currentPlayer = 'X'
+    this.isGameActive = true
     this.initBoard()
   }
 
@@ -43,7 +44,7 @@ class TicTacToe {
   }
 
   handleCellClick(index) {
-    if (this.board[index]) return
+    if (!this.isGameActive || this.board[index]) return
 
     this.board[index] = this.currentPlayer
     this.updateBoard()
@@ -51,9 +52,11 @@ class TicTacToe {
     if (this.checkWinner()) {
       this.turnDisplay.textContent = `Player ${this.currentPlayer} wins!`
       this.endGame()
+      this.isGameActive = false
     } else if (this.board.every((cell) => cell)) {
       this.turnDisplay.textContent = 'Draw!'
       this.endGame()
+      this.isGameActive = false
     } else {
       this.currentPlayer = this.currentPlayer === 'X' ? 'O' : 'X'
       this.turnDisplay.textContent = `Turn: ${this.currentPlayer}`
@@ -99,6 +102,7 @@ class TicTacToe {
   resetGame() {
     this.board = Array(9).fill(null)
     this.currentPlayer = 'X'
+    this.isGameActive = true
     this.updateBoard()
     this.turnDisplay.textContent = `Turn: ${this.currentPlayer}`
     this.boardElement.querySelectorAll('.cell').forEach((cell, index) => {

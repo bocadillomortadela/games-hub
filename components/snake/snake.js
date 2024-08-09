@@ -56,7 +56,6 @@ class SnakeGame {
   }
 
   startGame() {
-    // Reset the game state
     this.snake = [{ row: 10, col: 10 }]
     this.direction = 'right'
     this.score = 0
@@ -127,6 +126,7 @@ class SnakeGame {
         (segment) => segment.row === head.row && segment.col === head.col
       )
     ) {
+      alert(`Game Over! Your score was ${this.score}`)
       this.messageDisplay.textContent = `Game Over! Your score was ${this.score}`
       this.saveScore()
       this.resetGame()

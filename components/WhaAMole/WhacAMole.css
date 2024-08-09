@@ -80,11 +80,11 @@ body {
 }
 
 .game-container {
-  background-color: #d8a47f;
+  background-color: f0f0f0;
   display: grid;
   grid-template-columns: repeat(3, 120px);
   gap: 10px;
-  border: 2px solid rgb(216, 216, 216);
+
   padding: 20px;
   border-radius: 10px;
 }
@@ -98,7 +98,7 @@ body {
 }
 
 .mole {
-  background-size: 120px;
+  background-size: cover;
 
   background-image: url('https://media.geeksforgeeks.org/wp-content/uploads/20231130123541/mole.png');
 }
@@ -109,11 +109,15 @@ body {
     gap: 10px;
     padding: 5%;
     grid-template-columns: repeat(3, 38%);
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
   }
 
   .hole {
     height: 50px;
     width: 50px;
+    background-size: cover;
     border-radius: 100px;
   }
 

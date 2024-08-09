@@ -66,7 +66,7 @@ class WhacAMole {
 
   startGame() {
     if (!this.gameOver) {
-      return
+      this.endGame()
     }
 
     this.gameOver = false
@@ -101,10 +101,14 @@ class WhacAMole {
     this.updateScoreDisplay()
 
     this.timer = 0
-    this.updateScoreDisplay()
     this.timerDisplay.textContent = `Time: ${this.timer}s`
     this.startButton.disabled = false
     this.endButton.disabled = true
+
+    this.holes.forEach((hole) => {
+      hole.classList.remove('mole')
+      hole.removeEventListener('click', this.handleMoleClick.bind(this))
+    })
   }
 
   updateScoreDisplay() {
