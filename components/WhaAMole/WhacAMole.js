@@ -43,24 +43,29 @@ class WhacAMole {
 
     this.startButton.addEventListener('click', () => this.startGame())
     this.endButton.addEventListener('click', () => this.endGame())
+
+    this.handleMoleClick = this.handleMoleClick.bind(this)
   }
 
   comeout() {
     this.holes.forEach((hole) => {
       hole.classList.remove('mole')
-      hole.removeEventListener('click', this.handleMoleClick.bind(this))
+      hole.removeEventListener('click', this.handleMoleClick)
     })
 
     const random = this.holes[Math.floor(Math.random() * this.holes.length)]
     random.classList.add('mole')
-    random.addEventListener('click', this.handleMoleClick.bind(this))
+    random.addEventListener('click', this.handleMoleClick)
   }
 
   handleMoleClick(event) {
     if (!this.gameOver) {
-      this.score++
-      this.updateScoreDisplay()
-      event.target.classList.remove('mole')
+      const hole = event.target
+      if (hole.classList.contains('mole')) {
+        this.score++
+        this.updateScoreDisplay()
+        hole.classList.remove('mole')
+      }
     }
   }
 
@@ -107,7 +112,7 @@ class WhacAMole {
 
     this.holes.forEach((hole) => {
       hole.classList.remove('mole')
-      hole.removeEventListener('click', this.handleMoleClick.bind(this))
+      hole.removeEventListener('click', this.handleMoleClick)
     })
   }
 
