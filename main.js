@@ -1,6 +1,6 @@
 import './style.css'
-import TicTacToe from './components/TicTacToe/TicTacToe.js'
-import WhacAMole from './components/WhaAMole/WhacAMole.js'
+import { createTicTacToeGame } from './components/TicTacToe/tictactoe-2.js'
+import { createWhacAMole } from './components/WhaAMole/WhacAMole-2.js'
 import SnakeGame from './components/snake/snake.js'
 document.addEventListener('DOMContentLoaded', () => {
   const appContainer = document.getElementById('app')
@@ -8,53 +8,55 @@ document.addEventListener('DOMContentLoaded', () => {
   // Contenedor de botones
   const buttonContainer = document.createElement('div')
   buttonContainer.id = 'buttonContainer'
-  const ticTacToeButton = document.createElement('button')
-  ticTacToeButton.textContent = 'Tres en Raya'
+  const buttonTictactoe = document.createElement('button')
+  buttonTictactoe.textContent = 'Tic Tac Toe'
   const whacAMoleButton = document.createElement('button')
   whacAMoleButton.textContent = 'Whac-A-Mole'
   const snakeButton = document.createElement('button')
   snakeButton.textContent = 'Snake'
 
-  buttonContainer.appendChild(ticTacToeButton)
+  buttonContainer.appendChild(buttonTictactoe)
   buttonContainer.appendChild(whacAMoleButton)
   buttonContainer.appendChild(snakeButton)
   appContainer.appendChild(buttonContainer)
 
+  const gameContainer = document.createElement('div')
+  appContainer.appendChild(gameContainer)
+
   // Contenedores de juegos
-  const ticTacToeContainer = document.createElement('div')
+  const containerTicTacToe = document.createElement('div')
   const whacAMoleContainer = document.createElement('div')
   const snakeContainer = document.createElement('div')
-  appContainer.appendChild(ticTacToeContainer)
+
+  appContainer.appendChild(containerTicTacToe)
   appContainer.appendChild(whacAMoleContainer)
   appContainer.appendChild(snakeContainer)
 
   // Instancias de juegos
-  const ticTacToe = new TicTacToe(ticTacToeContainer)
-  const whacAMole = new WhacAMole(whacAMoleContainer)
+  const ticTacToeGame = createTicTacToeGame()
+  const whacAMoleGame = createWhacAMole()
   const snakeGame = new SnakeGame(snakeContainer)
 
-  ticTacToeButton.addEventListener('click', () => {
-    ticTacToeContainer.style.display = 'grid'
+  function showGame(selectedGame) {
+    containerTicTacToe.style.display = 'none'
     whacAMoleContainer.style.display = 'none'
     snakeContainer.style.display = 'none'
-    whacAMole.endGame(false)
-  })
 
-  whacAMoleButton.addEventListener('click', () => {
-    ticTacToeContainer.style.display = 'none'
-    whacAMoleContainer.style.display = 'grid'
-    snakeContainer.style.display = 'none'
-  })
+    if (selectedGame === 'ticTacToe') {
+      containerTicTacToe.style.display = 'grid'
+      containerTicTacToe.innerHTML = ''
+      containerTicTacToe.appendChild(ticTacToeGame)
+    } else if (selectedGame === 'whacAMoleGame') {
+      whacAMoleContainer.style.display = 'grid'
+      whacAMoleContainer.appendChild(whacAMoleGame)
+    } else if (selectedGame === 'snake') {
+      snakeContainer.style.display = 'grid'
+    }
+  }
 
-  snakeButton.addEventListener('click', () => {
-    ticTacToeContainer.style.display = 'none'
-    whacAMoleContainer.style.display = 'none'
-    snakeContainer.style.display = 'grid'
-    snakeGame.resetGame()
-  })
+  showGame('ticTacToe')
 
-  // Mostrar inicialmente Tres en Raya
-  ticTacToeContainer.style.display = 'grid'
-  whacAMoleContainer.style.display = 'none'
-  snakeContainer.style.display = 'none'
+  buttonTictactoe.addEventListener('click', () => showGame('ticTacToe'))
+  whacAMoleButton.addEventListener('click', () => showGame('whacAMoleGame'))
+  snakeButton.addEventListener('click', () => showGame('snake'))
 })
